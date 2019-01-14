@@ -132,8 +132,9 @@ extension ViewController: CLLocationManagerDelegate {
   }
   
   func DrawRoute(){
+    
 //    //  SVProgressHUD.show()
-      guard let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=33.6270752,73.065918&destination=33.6373732,73.0660971&mode=driving&key=AIzaSyDGvlfcGNP-ajtiXrhwyub47VyGSPPzM3I") else {return}
+      guard let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=33.6270752,73.065918&destination=33.6373732,73.0660971&mode=driving&key=****") else {return}
      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
      guard let dataResponse = data,
       error == nil else {

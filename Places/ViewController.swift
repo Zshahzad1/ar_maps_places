@@ -1,35 +1,18 @@
-/*
- * Copyright (c) 2016 Razeware LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+
 
 import UIKit
 
 import CoreLocation
+import GoogleMaps
 import MapKit
+import SwiftyJSON
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,MKMapViewDelegate {
   
   fileprivate var places = [Place]()
   fileprivate let locationManager = CLLocationManager()
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var MaPView: GMSMapView!
   var arViewController: ARViewController!
   var startedLoadingPOIs = false
   
@@ -41,6 +24,9 @@ class ViewController: UIViewController {
     locationManager.startUpdatingLocation()
     locationManager.requestWhenInUseAuthorization()
     mapView.userTrackingMode = MKUserTrackingMode.followWithHeading
+    //DrawRoute()
+    mapView.delegate = self
+    DragDirection()
   }
   
   override func didReceiveMemoryWarning() {
@@ -116,6 +102,90 @@ extension ViewController: CLLocationManagerDelegate {
       }
     }
   }
+  
+  
+  func DragDirection(){
+    let request = MKDirections.Request()
+    request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 40.7127, longitude: -74.0059), addressDictionary: nil))
+    request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.783333, longitude: -122.416667), addressDictionary: nil))
+    request.requestsAlternateRoutes = true
+    request.transportType = .automobile
+    
+    let directions = MKDirections(request: request)
+    
+    directions.calculate { [unowned self] response, error in
+      guard let unwrappedResponse = response else { return }
+      
+      for route in unwrappedResponse.routes {
+        self.mapView.add(route.polyline)
+       // self.mapView.camera = MKMapCamera(lookingAtCenter: CLLocationCoordinate2D(latitude: 40.7127, longitude: -74.0059), fromEyeCoordinate: CLLocationCoordinate2D(latitude: 37.783333, longitude: -122.416667), eyeAltitude:CLLocationDistance.ulpOfOne)
+        self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+      }
+    }
+  }
+  
+  func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+    renderer.strokeColor = UIColor.blue
+    renderer.lineWidth = 6
+    return renderer
+  }
+  
+  func DrawRoute(){
+//    //  SVProgressHUD.show()
+      guard let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=33.6270752,73.065918&destination=33.6373732,73.0660971&mode=driving&key=AIzaSyDGvlfcGNP-ajtiXrhwyub47VyGSPPzM3I") else {return}
+     let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+     guard let dataResponse = data,
+      error == nil else {
+        print(error?.localizedDescription ?? "Response Error")
+        return }
+    do{
+      
+      let jsonResponse = try JSONSerialization.jsonObject(with:
+        dataResponse, options: [])
+      print(jsonResponse)
+      let json = JSON(jsonResponse)
+      let routes = json["routes"].arrayValue
+      var polyline = GMSPolyline()
+        for route in routes
+            {
+                  let routeOverviewPolyline = route["overview_polyline"].dictionary
+                  let points = routeOverviewPolyline?["points"]?.stringValue
+                  let path = GMSPath.init(fromEncodedPath: points!)
+                  polyline = GMSPolyline.init(path: path)
+                  polyline.strokeColor = UIColor.gray
+                  polyline.strokeWidth = 8
+              polyline.map = self.MaPView
+            }
+      
+//      self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+//      let rect = route.polyline.boundingMapRect
+//      self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+     } catch let parsingError {
+      print("Error", parsingError)
+    }
+  }
+  task.resume()
+
+//      let json = JSON(response.value ?? "")
+//      let routes = json["routes"].arrayValue
+//      print(routes.count)
+//      for route in routes
+//      {
+//        let routeOverviewPolyline = route["overview_polyline"].dictionary
+//        let points = routeOverviewPolyline?["points"]?.stringValue
+//        let path = GMSPath.init(fromEncodedPath: points!)
+//        self.polyline = GMSPolyline.init(path: path)
+//        self.polyline.strokeColor = UIColor.gray
+//        self.polyline.strokeWidth = 8
+//        self.polyline.map = self.MapView
+//      }
+//      let position = CLLocationCoordinate2D(latitude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude)
+//      let radius = (self.location).distance(from: self.Destination)
+//      let update = GMSCameraUpdate.fit(coordinate: position, radius: radius)
+//      self.MapView.animate(with: update)
+  }
+  
 }
 
 extension ViewController: ARDataSource {

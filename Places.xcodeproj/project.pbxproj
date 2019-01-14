@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4913596410322C0AF322A622 /* Pods_Places.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9E7267DD83B0EEA6EE08F /* Pods_Places.framework */; };
 		8F7404871DCF8834009A6F0B /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7404861DCF8834009A6F0B /* AnnotationView.swift */; };
 		8FFCD7A11DC4A204009E3855 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCD7A01DC4A204009E3855 /* AppDelegate.swift */; };
 		8FFCD7A31DC4A204009E3855 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFCD7A21DC4A204009E3855 /* ViewController.swift */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2AD9E7267DD83B0EEA6EE08F /* Pods_Places.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Places.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45D7247F9010A2DA58AB06F0 /* Pods-Places.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.debug.xcconfig"; sourceTree = "<group>"; };
 		8F7404861DCF8834009A6F0B /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		8FFCD79D1DC4A204009E3855 /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FFCD7A01DC4A204009E3855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		8FFCD7D11DC4A539009E3855 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		8FFCD7D31DC4A85B009E3855 /* PlacesLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesLoader.swift; sourceTree = "<group>"; };
 		8FFCD7D51DC608FE009E3855 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
+		C9E73E83C0BF45692621C42C /* Pods-Places.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Places.release.xcconfig"; path = "Pods/Target Support Files/Pods-Places/Pods-Places.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,18 +70,29 @@
 				8FFCD7D01DC4A3BB009E3855 /* MapKit.framework in Frameworks */,
 				8FFCD7CE1DC4A3B4009E3855 /* CoreMotion.framework in Frameworks */,
 				8FFCD7CC1DC4A3AD009E3855 /* CoreLocation.framework in Frameworks */,
+				4913596410322C0AF322A622 /* Pods_Places.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17737C17398C594BBAF429F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				45D7247F9010A2DA58AB06F0 /* Pods-Places.debug.xcconfig */,
+				C9E73E83C0BF45692621C42C /* Pods-Places.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8FFCD7941DC4A204009E3855 = {
 			isa = PBXGroup;
 			children = (
 				8FFCD79F1DC4A204009E3855 /* Places */,
 				8FFCD79E1DC4A204009E3855 /* Products */,
 				8FFCD7CA1DC4A3AC009E3855 /* Frameworks */,
+				17737C17398C594BBAF429F7 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +171,7 @@
 				8FFCD7CF1DC4A3BB009E3855 /* MapKit.framework */,
 				8FFCD7CD1DC4A3B4009E3855 /* CoreMotion.framework */,
 				8FFCD7CB1DC4A3AD009E3855 /* CoreLocation.framework */,
+				2AD9E7267DD83B0EEA6EE08F /* Pods_Places.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,9 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8FFCD7AF1DC4A204009E3855 /* Build configuration list for PBXNativeTarget "Places" */;
 			buildPhases = (
+				AD38F215ABF51212FF9A1E5B /* [CP] Check Pods Manifest.lock */,
 				8FFCD7991DC4A204009E3855 /* Sources */,
 				8FFCD79A1DC4A204009E3855 /* Frameworks */,
 				8FFCD79B1DC4A204009E3855 /* Resources */,
+				C9365ECF685B5743A5A9622F /* [CP] Copy Pods Resources */,
+				38C6EDF7D7A3A614F762995A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,7 +211,7 @@
 				TargetAttributes = {
 					8FFCD79C1DC4A204009E3855 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = H7G5Q7B4QE;
+						DevelopmentTeam = 3AD66WX5D7;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -231,6 +250,63 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38C6EDF7D7A3A614F762995A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Places/Pods-Places-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Places/Pods-Places-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD38F215ABF51212FF9A1E5B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Places-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9365ECF685B5743A5A9622F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Places/Pods-Places-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Places/Pods-Places-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8FFCD7991DC4A204009E3855 /* Sources */ = {
@@ -367,9 +443,10 @@
 		};
 		8FFCD7B01DC4A204009E3855 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D7247F9010A2DA58AB06F0 /* Pods-Places.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = H7G5Q7B4QE;
+				DEVELOPMENT_TEAM = 3AD66WX5D7;
 				INFOPLIST_FILE = Places/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.Places;
@@ -380,9 +457,10 @@
 		};
 		8FFCD7B11DC4A204009E3855 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9E73E83C0BF45692621C42C /* Pods-Places.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = H7G5Q7B4QE;
+				DEVELOPMENT_TEAM = 3AD66WX5D7;
 				INFOPLIST_FILE = Places/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.Places;
